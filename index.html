@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="pt-BR"> <!--lINGUAGEM DO SITE-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coca-Cola - Sabor Original</title> <!--Titulo da minha página--> 
+    <link rel="stylesheet" href="style.css"> <!--Implementando o CSS no HTML-->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --coca-red: #F40009;
+            --coca-dark-red: #C40005;
+            --coca-white: #FFFFFF;
+            --coca-black: #000000;
+            --coca-gray: #F5F5F5;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            overflow-x: hidden;
+            background-color: var(--coca-white);
+        }
+
+        /* Header */
+        header { 
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--coca-white);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--coca-black);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--coca-red);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--coca-red);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            width: 30px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 120px;
+            min-height: 90vh;
+            background: linear-gradient(135deg, var(--coca-red) 0%, var(--coca-dark-red) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            flex: 1;
+            z-index: 2;
+            animation: fadeInLeft 1s ease;
+        }
+
+        .hero-content h1 {
+            font-size: 5rem;
+            color: var(--coca-white);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            color: var(--coca-white);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            background-color: var(--coca-white);
+            color: var(--coca-red);
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background-color: var(--coca-black);
+            color: var(--coca-white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image img {
+            max-width: 500px;
+            width: 100%;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .splash-bg {
+            position: absolute;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .splash-1 {
+            top: 10%;
+            left: 5%;
+            width: 400px;
+            animation: rotate 20s linear infinite;
+        }
+
+        .splash-2 {
+            bottom: 10%;
+            right: 5%;
+            width: 350px;
+            animation: rotate 15s linear infinite reverse;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 6rem 5%;
+            background-color: var(--coca-gray);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            color: var(--coca-black);
+            margin-bottom: 1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 4rem;
+            font-weight: 300;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background-color: var(--coca-white);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--coca-red) 0%, var(--coca-dark-red) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(244, 0, 9, 0.3);
+        }
+
+        .product-card img {
+            width: 100%;
+            max-width: 250px;
+            margin-bottom: 2rem;
+            transition: transform 0.4s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .product-card h3 {
+            font-size: 2rem;
+            color: var(--coca-black);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+            transition: color 0.4s ease;
+        }
+
+        .product-card:hover h3 {
+            color: var(--coca-white);
+        }
+
+        .product-card p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+            transition: color 0.4s ease;
+        }
+
+        .product-card:hover p {
+            color: var(--coca-white);
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 6rem 5%;
+            background-color: var(--coca-black);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .experience-text h2 {
+            font-size: 4rem;
+            color: var(--coca-white);
+            margin-bottom: 2rem;
+            font-weight: 900;
+            line-height: 1.1;
+        }
+
+        .experience-text p {
+            font-size: 1.3rem;
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .experience-image {
+            position: relative;
+        }
+
+        .experience-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(244, 0, 9, 0.4);
+        }
+
+        .splash-overlay {
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            opacity: 0.6;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--coca-red);
+            color: var(--coca-white);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li a {
+            color: var(--coca-white);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            opacity: 0.7;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            nav {
+                position: fixed;
+                top: 100px;
+                left: -100%;
+                flex-direction: column;
+                background-color: var(--coca-white);
+                width: 100%;
+                padding: 2rem 5%;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transition: left 0.3s ease;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 3rem 5%;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .hero-image img {
+                max-width: 350px;
+            }
+
+            .experience-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .experience-text h2 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Simbolo%20coca-5QCDsE9dwXM4nqEIlWIfUSvTmQmKyD.jpg" alt="Coca-Cola Logo" class="logo">
+        <nav id="nav">
+            <a href="#home">Início</a>
+            <a href="#products">Produtos</a>
+            <a href="#experience">Experiência</a>
+            <a href="#contact">Contato</a>
+        </nav>
+        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Menu.icon-Fb6ZzR6tNdGJabxg5BRPPwmYYafZCq.png" alt="Menu" class="menu-toggle" id="menuToggle">
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/respingo%20de%20coca%202-tOKzK9SaJ78OXjBdtW3iK4zGfAkiF4.webp" alt="Splash" class="splash-bg splash-1">
+        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Respingo%20de%20coca%203-0DsJTrsDKAaj9D2dEZyYfWgu9rUy3Z.png" alt="Splash" class="splash-bg splash-2">
+        
+        <div class="hero-content">
+            <h1>Sabor<br>Original</h1>
+            <p>A felicidade está nas pequenas coisas.<br>Abra uma Coca-Cola e aproveite o momento.</p>
+            <button class="cta-button">Descubra Mais</button>
+        </div>
+        
+        <div class="hero-image">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Coca%20-%20cola%203D-O64AZ0nnbWGgQwe9VGIdV5bbkYFNss.webp" alt="Coca-Cola Bottle" id="heroBottle">
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <h2 class="section-title">Nossos Produtos</h2>
+        <p class="section-subtitle">Escolha seu sabor favorito e refresque seu dia</p>
+        
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Lata%203D-AsShGLIxncuA6kfUChLnMBLen6XUOE.jpg" alt="Coca-Cola Lata">
+                <h3>Coca-Cola Lata</h3>
+                <p>O sabor original que você ama em uma embalagem prática e refrescante. Perfeita para qualquer momento.</p>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Coca%20-%20cola%203D-O64AZ0nnbWGgQwe9VGIdV5bbkYFNss.webp" alt="Coca-Cola Garrafa">
+                <h3>Coca-Cola Garrafa</h3>
+                <p>Clássica e icônica. A garrafa de Coca-Cola que conquistou gerações com seu design inconfundível.</p>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Respingo%20coca%20cola-AA9gcuKQ0x5xwaqgWRAkF0PjWOBv6N.jpg" alt="Coca-Cola Splash">
+                <h3>Experiência Única</h3>
+                <p>Cada gole é uma explosão de sabor. Sinta a refrescância e a energia que só Coca-Cola proporciona.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="experience-content">
+            <div class="experience-text">
+                <h2>Mais que uma bebida, uma experiência</h2>
+                <p>Desde 1886, Coca-Cola tem sido sinônimo de momentos especiais, celebrações e conexões verdadeiras. Cada garrafa carrega mais de um século de tradição e inovação.</p>
+                <p>Nosso compromisso é trazer felicidade para milhões de pessoas ao redor do mundo, um gole de cada vez.</p>
+                <button class="cta-button">Nossa História</button>
+            </div>
+            
+            <div class="experience-image">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Respingo%20coca%20cola-AA9gcuKQ0x5xwaqgWRAkF0PjWOBv6N.jpg" alt="Coca-Cola Experience">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Respingo%20de%20coca%203-0DsJTrsDKAaj9D2dEZyYfWgu9rUy3Z.png" alt="Splash" class="splash-overlay">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Produtos</h3>
+                <ul>
+                    <li><a href="#">Coca-Cola Original</a></li>
+                    <li><a href="#">Coca-Cola Zero</a></li>
+                    <li><a href="#">Coca-Cola Light</a></li>
+                    <li><a href="#">Coca-Cola Sabores</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Empresa</h3>
+                <ul>
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Sustentabilidade</a></li>
+                    <li><a href="#">Carreiras</a></li>
+                    <li><a href="#">Imprensa</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Suporte</h3>
+                <ul>
+                    <li><a href="#">Contato</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 The Coca-Cola Company. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,546 @@
+
+/* Reset básico: remove margens, paddings e define box-sizing */
+* {
+  margin: 0; /* Tira todas as margens */
+  padding: 0; /* Remove os paddings */
+  box-sizing: border-box; /* Define box-sizing*/
+}
+
+/* Variáveis CSS: cores da marca Coca-Cola */
+:root {
+  --coca-red: #f40009; /* Vermelho principal da Coca-Cola */
+  --coca-dark-red: #c40005; /* Vermelho escuro para gradientes */
+  --coca-white: #ffffff; /* Branco */
+  --coca-black: #000000; /* Preto */
+  --coca-gray: #f5f5f5; /* Cinza claro para backgrounds */
+}
+
+/* Estilos globais do body */
+body { 
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden; /* Previne scroll horizontal */
+  background-color: var(--coca-white);
+}
+
+header {
+  position: fixed; /* Mantém o header fixo no topo */
+  top: 0; 
+  left: 0;
+  right: 0;
+  background-color: var(--coca-white);
+  padding: 1.5rem 5%; 
+  display: flex; 
+  justify-content: space-between;
+  align-items: center; /* Para ficar no centro */
+  z-index: 1000; /* Garante que fique acima de outros elementos */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+}
+
+/* Logo da Coca-Cola */
+.logo {
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+/* Efeito hover no logo: aumenta e rotaciona */
+.logo:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Menu de navegação */
+nav {
+  display: flex;
+  gap: 2.5rem; /* Espaçamento entre os links */
+}
+
+/* Links do menu */
+nav a {
+  color: var(--coca-black);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+/* Linha animada que aparece abaixo dos links */
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: var(--coca-red);
+  transition: width 0.3s ease;
+}
+
+/* Efeito hover nos links: muda cor */
+nav a:hover {
+  color: var(--coca-red);
+}
+
+/* Efeito hover nos links: expande a linha */
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Ícone do menu hambúrguer (oculto em desktop) */
+.menu-toggle {
+  display: none;
+  width: 30px;
+  cursor: pointer;
+}
+
+/* ========================================
+   HERO SECTION - SEÇÃO PRINCIPAL
+   ======================================== */
+
+.hero {
+  margin-top: 120px; /* Espaço para o header fixo */
+  min-height: 90vh;
+  background: linear-gradient(135deg, var(--coca-red) 0%, var(--coca-dark-red) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Conteúdo textual do hero */
+.hero-content {
+  flex: 1;
+  z-index: 2;
+  animation: fadeInLeft 1s ease; /* Animação de entrada */
+}
+
+/* Título principal */
+.hero-content h1 {
+  font-size: 5rem;
+  color: var(--coca-white);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+}
+
+/* Parágrafo descritivo */
+.hero-content p {
+  font-size: 1.5rem;
+  color: var(--coca-white);
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+
+/* Botão de call-to-action */
+.cta-button {
+  background-color: var(--coca-white);
+  color: var(--coca-red);
+  padding: 1.2rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Efeito hover no botão: inverte cores e eleva */
+.cta-button:hover {
+  background-color: var(--coca-black);
+  color: var(--coca-white);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Container da imagem do produto */
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Imagem do produto com animação flutuante */
+.hero-image img {
+  max-width: 500px;
+  width: 100%;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Imagens de splash decorativas no fundo */
+.splash-bg {
+  position: absolute;
+  opacity: 0.15; /* Semi-transparente */
+  pointer-events: none; /* Não interfere com cliques */
+}
+
+/* Splash 1: canto superior esquerdo com rotação */
+.splash-1 {
+  top: 10%;
+  left: 5%;
+  width: 400px;
+  animation: rotate 20s linear infinite;
+}
+
+/* Splash 2: canto inferior direito com rotação reversa */
+.splash-2 {
+  bottom: 10%;
+  right: 5%;
+  width: 350px;
+  animation: rotate 15s linear infinite reverse;
+}
+
+/* ========================================
+   PRODUCTS SECTION - SEÇÃO DE PRODUTOS
+   ======================================== */
+
+.products {
+  padding: 6rem 5%;
+  background-color: var(--coca-gray);
+}
+
+/* Título da seção */
+.section-title {
+  text-align: center;
+  font-size: 3.5rem;
+  color: var(--coca-black);
+  margin-bottom: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+/* Subtítulo da seção */
+.section-subtitle {
+  text-align: center;
+  font-size: 1.3rem;
+  color: #666;
+  margin-bottom: 4rem;
+  font-weight: 300;
+}
+
+/* Grid responsivo de produtos */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Card individual de produto */
+.product-card {
+  background-color: var(--coca-white);
+  border-radius: 20px;
+  padding: 3rem;
+  text-align: center;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Overlay vermelho que aparece no hover */
+.product-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--coca-red) 0%, var(--coca-dark-red) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+/* Mostra o overlay no hover */
+.product-card:hover::before {
+  opacity: 1;
+}
+
+/* Efeito hover no card: eleva e adiciona sombra */
+.product-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 20px 50px rgba(244, 0, 9, 0.3);
+}
+
+/* Imagem do produto */
+.product-card img {
+  width: 100%;
+  max-width: 250px;
+  margin-bottom: 2rem;
+  transition: transform 0.4s ease;
+  position: relative;
+  z-index: 2;
+}
+
+/* Efeito hover na imagem: aumenta e rotaciona */
+.product-card:hover img {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Título do produto */
+.product-card h3 {
+  font-size: 2rem;
+  color: var(--coca-black);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+  transition: color 0.4s ease;
+}
+
+/* Muda cor do título no hover */
+.product-card:hover h3 {
+  color: var(--coca-white);
+}
+
+/* Descrição do produto */
+.product-card p {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+  transition: color 0.4s ease;
+}
+
+/* Muda cor da descrição no hover */
+.product-card:hover p {
+  color: var(--coca-white);
+}
+
+/* ========================================
+   EXPERIENCE SECTION - SEÇÃO DE EXPERIÊNCIA
+   ======================================== */
+
+.experience {
+  padding: 6rem 5%;
+  background-color: var(--coca-black);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Grid de duas colunas: texto e imagem */
+.experience-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+/* Título da seção de experiência */
+.experience-text h2 {
+  font-size: 4rem;
+  color: var(--coca-white);
+  margin-bottom: 2rem;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+/* Parágrafos descritivos */
+.experience-text p {
+  font-size: 1.3rem;
+  color: #ccc;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+/* Container da imagem */
+.experience-image {
+  position: relative;
+}
+
+/* Imagem principal com bordas arredondadas */
+.experience-image img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(244, 0, 9, 0.4);
+}
+
+/* Splash decorativo sobreposto */
+.splash-overlay {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 300px;
+  opacity: 0.6;
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ========================================
+   FOOTER - RODAPÉ
+   ======================================== */
+
+footer {
+  background-color: var(--coca-red);
+  color: var(--coca-white);
+  padding: 3rem 5%;
+  text-align: center;
+}
+
+/* Grid de colunas do footer */
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+/* Título de cada seção do footer */
+.footer-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+/* Remove marcadores das listas */
+.footer-section ul {
+  list-style: none;
+}
+
+/* Espaçamento entre itens da lista */
+.footer-section ul li {
+  margin-bottom: 0.8rem;
+}
+
+/* Links do footer */
+.footer-section ul li a {
+  color: var(--coca-white);
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Efeito hover nos links: reduz opacidade */
+.footer-section ul li a:hover {
+  opacity: 0.7;
+}
+
+/* Seção inferior do footer com copyright */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 2rem;
+  font-size: 0.9rem;
+}
+
+/* ========================================
+   ANIMAÇÕES
+   ======================================== */
+
+/* Animação de entrada: desliza da esquerda */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animação flutuante: sobe e desce */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Animação de rotação contínua */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========================================
+   RESPONSIVIDADE - MOBILE
+   ======================================== */
+
+@media (max-width: 968px) {
+  /* Menu mobile: escondido por padrão, desliza da esquerda */
+  nav {
+    position: fixed;
+    top: 100px;
+    left: -100%; /* Escondido fora da tela */
+    flex-direction: column;
+    background-color: var(--coca-white);
+    width: 100%;
+    padding: 2rem 5%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+  }
+
+  /* Menu mobile ativo: visível */
+  nav.active {
+    left: 0;
+  }
+
+  /* Mostra o ícone do menu hambúrguer */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Hero em coluna única no mobile */
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 3rem 5%;
+  }
+
+  /* Reduz tamanho do título no mobile */
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+
+  /* Reduz tamanho do parágrafo no mobile */
+  .hero-content p {
+    font-size: 1.2rem;
+  }
+
+  /* Reduz tamanho da imagem no mobile */
+  .hero-image img {
+    max-width: 350px;
+  }
+
+  /* Experience em coluna única no mobile */
+  .experience-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  /* Reduz tamanho do título no mobile */
+  .experience-text h2 {
+    font-size: 2.5rem;
+  }
+
+  /* Reduz tamanho do título da seção no mobile */
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  /* Grid de produtos em coluna única no mobile */
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
